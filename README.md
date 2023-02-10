@@ -2,8 +2,8 @@
 
 ## A collection of webscraping algorithm to scrape specific e-commerce websites, getting prices, location, and details about the items. ##
 
-`The initial goal is to collect the largest possible amount of data about e-commerce sites that operates in the local boundaries, `
-`the next step is to elaborate all this data and make a well oiled pipeline that spits out the specific information we need.`
+```The initial goal is to collect the largest possible amount of data about e-commerce sites that operates in the local boundaries```
+```the next step is to elaborate all this data and make a well oiled pipeline that spits out the specific information we need```
 
 ### The project structure should be like this: ###
     MACCHINETTA DEGLI OGGETTI

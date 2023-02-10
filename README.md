@@ -28,3 +28,5 @@
     but it should work on Windows and MacOs too.
     Conda is used to manage the virtual environment and all the dependencies
     are installed using conda with conda-forge channel.
+
+### Project is entirely written in Python 3.11.0, in compliance with the PEP-8 standards ###

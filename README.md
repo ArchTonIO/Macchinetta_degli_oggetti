@@ -13,6 +13,7 @@
 >                |- commons/
 >                |-.gitignore
 >                |- cerco_e_trovo_ws/
+>                |- ebay_ws/
 >                |- subito_ws/
 >                |- facebook_marketplace_ws/
 >                |- amazon_ws/

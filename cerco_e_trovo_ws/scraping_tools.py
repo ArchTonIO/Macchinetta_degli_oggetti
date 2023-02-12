@@ -25,6 +25,7 @@ class ScrapingTools:
     @staticmethod
     def init_firefox_webdriver(
         url: str,
+        excecutable_path: str = "",
         headless: bool = True,
         winsize: tuple = (1920, 1080)
     ) -> webdriver.Firefox:
@@ -41,10 +42,17 @@ class ScrapingTools:
         """
         options = Options()
         options.headless = headless
-        firefox_driver = webdriver.Firefox(
-            options=options,
-            service=Service(GeckoDriverManager().install())
-        )
+        if excecutable_path:
+            firefox_driver = webdriver.Firefox(
+                options=options,
+                executable_path=excecutable_path
+            )
+        else:
+            print("Excecutable path not provided, downloading geckodriver...")
+            firefox_driver = webdriver.Firefox(
+                options=options,
+                service=Service(GeckoDriverManager().install())
+            )
         firefox_driver.set_window_size(winsize[0], winsize[1])
         firefox_driver.get(url)
         sleep(5)

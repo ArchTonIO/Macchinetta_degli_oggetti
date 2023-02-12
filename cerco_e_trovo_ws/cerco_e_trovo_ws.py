@@ -104,7 +104,11 @@ class CercoeTrovoBot:
                     wait=2
                 )
             except TimeoutException:
-                continue
+                ScrapingTools.click_button(
+                    driver=driver,
+                    xpath=Xpaths.SMALL_CONTAINERS.format(number=i),
+                    wait=2
+                )
             data = CercoeTrovoBot.__fetch_item_data(driver)
             ScrapingTools.click_button(
                 driver=driver,

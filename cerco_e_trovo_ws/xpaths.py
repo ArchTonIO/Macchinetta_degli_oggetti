@@ -15,6 +15,7 @@ class Xpaths:
     COMUNE_FIELD = '//*[@id="id-luogo"]'
     SEARCH_BUTTON = '/html/body/div[4]/div/main/form/div/div[5]/div/input'
     CONTAINERS = '/html/body/div[4]/div/main/a[{number}]/div[2]/div'
+    SMALL_CONTAINERS = '/html/body/div[4]/div/main/a[{number}]/p'
     NEXT_PAGE_BUTTON_1 = '/html/body/div[4]/div/main/span[1]/nav/ul/li[5]/a'
     NEXT_PAGE_BUTTON_2 = '/html/body/div[4]/div/main/span[1]/nav/ul/li[10]/a'
     LAST_PAGE = '/html/body/div[4]/div/main/span[1]/nav/ul/li[6]/a'

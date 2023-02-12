@@ -12,13 +12,13 @@ def print_progress_bar(
     fill='█'
 ) -> None:
     """
-    Call in a loop to create terminal progress bar
+    Call in a loop to create terminal progress bar.
     - Args:
-        - iteration: current iteration
-        - total: total iterations
-        - decimals: positive number of decimals
-        - length: character length of bar
-        - fill: bar fill character
+        - iteration: current iteration.
+        - total: total iterations.
+        - decimals: positive number of decimals.
+        - length: character length of bar.
+        - fill: bar fill character.
     """
     percent = (
         "{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))

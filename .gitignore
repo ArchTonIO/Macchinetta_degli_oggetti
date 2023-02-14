@@ -2,3 +2,4 @@
 OUTPUT/
 __pycache__/
 geckodriver.log
+telegram_token.py

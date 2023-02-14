@@ -5,9 +5,9 @@ import socket
 from os import mkdir
 from os.path import isdir
 import pandas
-from xpaths import Xpaths
-from scraping_tools import ScrapingTools
-from cerco_e_trovo_ws import CercoeTrovoBot
+from settings.xpaths import Xpaths
+from tools.scraping_tools import ScrapingTools
+from scrapers.cerco_e_trovo_ws import CercoeTrovoBot
 
 
 if __name__ == "__main__":

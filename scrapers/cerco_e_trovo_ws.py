@@ -6,9 +6,9 @@ This module explicitly use firefox webdriver.
 from time import sleep
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
-from xpaths import Xpaths
-from scraping_tools import ScrapingTools
-from progress_indicators import print_progress_bar
+from settings.xpaths import Xpaths
+from tools.scraping_tools import ScrapingTools
+from tools.progress_indicators import print_progress_bar
 
 
 class CercoeTrovoBot:

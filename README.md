@@ -9,15 +9,22 @@
 >     MACCHINETTA DEGLI OGGETTI
 >                |
 >                |-.vscode/
->                |- utils/
->                |- commons/
->                |-.gitignore
->                |- cerco_e_trovo_ws/
->                |- ebay_ws/
->                |- subito_ws/
->                |- facebook_marketplace_ws/
->                |- amazon_ws/
->                |- ... (all the possible websites to scrape)
+>                |- scrapers/
+>                        |- cerco_e_trovo_ws.py
+>                        |- ebay_ws.py
+>                        |- subito_ws.py
+>                        |- facebook_marketplace_ws.py
+>                        |- amazon_ws.py
+>                        |- ... (all the possible websites to scrape).py
+>                |
+>                |- settings/
+>                |- tools/
+>                |- .gitignore
+>                |- license.md
+>                |- main.py
+>                |- README.md
+
+
 
 ### Dependendencies: ###
 

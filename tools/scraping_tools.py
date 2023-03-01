@@ -162,6 +162,5 @@ class ScrapingTools:
         """
         action_chains = ActionChains(driver)
         action_chains.send_keys(string)
-        if press_enter:
-            action_chains.send_keys(Keys.ENTER)
+        action_chains.send_keys(Keys.ENTER) if press_enter else None
         action_chains.perform()

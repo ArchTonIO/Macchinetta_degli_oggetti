@@ -1,9 +1,9 @@
 """
 The bot starting point.
 """
+# pylint: disable=expression-not-assigned
 import socket
-from os import mkdir
-from os.path import isdir
+from pathlib import Path
 import pandas
 from settings.xpaths import Xpaths
 from tools.scraping_tools import ScrapingTools
@@ -11,9 +11,8 @@ from scrapers.cerco_e_trovo_ws import CercoeTrovoBot
 
 
 if __name__ == "__main__":
-    dirmakin = mkdir("OUTPUT") if not isdir("OUTPUT") else None
-    subdirmakin = mkdir("OUTPUT/temp") if not isdir("OUTPUT/temp") else None
-    del(dirmakin, subdirmakin)
+    outdir = Path("OUTPUT/temp")
+    outdir.mkdir(parents=True, exist_ok=True)
     if "prod" in socket.gethostname():
         print("running on production server")
         driver = ScrapingTools.init_firefox_webdriver(

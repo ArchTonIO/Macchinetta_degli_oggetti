@@ -148,8 +148,7 @@ class CercoeTrovoBot:
             "DETAILS": [],
             "PHONE_NUMBER": []
         }
-        xpaths_counter = 0
-        for item in data_dict.items():
+        for xpaths_counter, item in enumerate(data_dict.items()):
             try:
                 item[1].append(
                     ScrapingTools.get_element_by_xpath(
@@ -160,5 +159,4 @@ class CercoeTrovoBot:
                 )
             except AttributeError:
                 item[1].append("not found")
-            xpaths_counter += 1
         return data_dict

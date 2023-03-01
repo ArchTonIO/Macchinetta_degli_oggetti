@@ -17,28 +17,32 @@ class TelegramBot:
         - max_messages_in_memory: the maximum number of received messages to be
         stored in memory.
     """
-    def __init__(self, token: str = TOKEN):
-        self.updates_url = f"https://api.telegram.org/bot{token}/getUpdates"
-        self.raw_dicts = []
-        self.last_update = {}
+    token = TOKEN
+    updates_url = f"https://api.telegram.org/bot{token}/getUpdates"
+    raw_dicts = []
+    last_update = {}
 
-    def async_look_for_updates(self) -> None:
+    @staticmethod
+    def async_look_for_updates() -> None:
         """
         This method starts a thread to look for updates.
         """
-        looking_thread = Thread(target=self.__look_for_updates)
+        looking_thread = Thread(target=TelegramBot.__look_for_updates)
         looking_thread.start()
 
-    def __look_for_updates(self) -> None:
+    @staticmethod
+    def __look_for_updates() -> None:
         """
         This method looks for updates.
         """
         res = {}
         while True:
             sleep(1)
-            updates_dict = (requests.get(self.updates_url, timeout=10).json())
+            updates_dict = (requests.get(
+                TelegramBot.updates_url, timeout=10
+            ).json())
             res = updates_dict["result"][-1]
-            if res and res not in self.raw_dicts:
+            if res and res not in TelegramBot.raw_dicts:
                 chat_id = res["message"]["chat"]["id"]
                 fristname = (
                     res["message"]["chat"]["first_name"]
@@ -50,47 +54,49 @@ class TelegramBot:
                     res["message"]["chat"]["username"]
                 )
                 text = res["message"]["text"]
-                self.last_update = {
+                TelegramBot.last_update = {
                         "chat_id": chat_id,
                         "fristname": fristname,
                         "lastname": lastname,
                         "username": username,
                         "text": text
                     }
-                self.raw_dicts.append(res)
-                self.__process_requests()
+                TelegramBot.raw_dicts.append(res)
+                TelegramBot.__process_requests()
 
-    def __process_requests(self) -> dict:
+    @staticmethod
+    def __process_requests() -> dict:
         """
         This method processes the requests saved in the updates_list.
         """
         try:
-            msgs = BOT_INTERACTIONS_DICT[self.last_update["text"]]
-            if self.last_update["text"] == "/start":
+            msgs = BOT_INTERACTIONS_DICT[TelegramBot.last_update["text"]]
+            if TelegramBot.last_update["text"] == "/start":
                 msgs = BOT_INTERACTIONS_DICT["/start"].format(
-                    name=self.last_update["fristname"]
+                    name=TelegramBot.last_update["fristname"]
                 )
             if isinstance(msgs, str):
-                self.__send_message(
-                    chat_id=self.last_update["chat_id"],
+                TelegramBot.__send_message(
+                    chat_id=TelegramBot.last_update["chat_id"],
                     message=msgs
                 )
             elif isinstance(msgs, list):
                 for msg in msgs:
-                    self.__send_message(
-                        chat_id=self.last_update["chat_id"],
+                    TelegramBot.__send_message(
+                        chat_id=TelegramBot.last_update["chat_id"],
                         message=msg
                     )
         except KeyError:
-            self.__send_message(
-                chat_id=self.last_update["chat_id"],
+            TelegramBot.__send_message(
+                chat_id=TelegramBot.last_update["chat_id"],
                 message=(
                     "Comando non riconosciuto"
                     ", se lo implemento ti avviso!"
                 )
             )
 
-    def __send_message(self, chat_id: str, message: str) -> None:
+    @staticmethod
+    def __send_message(chat_id: str, message: str) -> None:
         """
         This method sends a message to a specific user.
         - Args:
@@ -101,5 +107,4 @@ class TelegramBot:
             f"https://api.telegram.org/bot{TOKEN}/send"
             f"Message?chat_id={chat_id}&text={message}"
         )
-        send = requests.get(url, timeout=10).json()
-        del send
+        requests.get(url, timeout=10).json()

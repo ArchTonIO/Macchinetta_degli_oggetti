@@ -67,4 +67,9 @@ BOT_INTERACTIONS_DICT = {
     "updates off": "Notifiche disattivate",
     "developer on": "Modalita' sviluppatore attivata",
     "developer off": "Modalita' sviluppatore disattivata",
+    "about": (
+        "Macchinetta degli oggetti v1.0.0\n"
+        "Running entirely on python 3.11.0, .csv files, padnas and an "
+        "old laptop mounting Arch Linux"
+    )
 }

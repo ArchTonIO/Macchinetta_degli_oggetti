@@ -8,8 +8,8 @@ def print_progress_bar(
     iteration,
     total,
     decimals=1,
-    length=100,
-    fill='█'
+    length=71,
+    fill="#"
 ) -> None:
     """
     Call in a loop to create terminal progress bar.

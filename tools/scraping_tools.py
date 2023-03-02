@@ -160,7 +160,8 @@ class ScrapingTools:
             - string: string to insert.
             - press_enter: press the Enter key after inserting the string.
         """
-        action_chains = ActionChains(driver)
-        action_chains.send_keys(string)
-        action_chains.send_keys(Keys.ENTER) if press_enter else None
-        action_chains.perform()
+        # pylint: disable=expression-not-assigned
+        with ActionChains(driver) as action_chains:
+            action_chains.send_keys(string)
+            action_chains.send_keys(Keys.ENTER) if press_enter else None
+            action_chains.perform()

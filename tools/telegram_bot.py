@@ -3,9 +3,15 @@ This module contains the TelegramBot class to send updates to the users.
 """
 from threading import Thread
 from time import sleep
+import json
 import requests
 from settings.telegram_token import TOKEN
-from settings.bot_interactions import BOT_INTERACTIONS_DICT
+
+with open("settings/bot_interactions.json", encoding="UTF-8") as f:
+    BOT_INTERACTIONS_DICT = json.load(f)
+
+with open("version.json", encoding="UTF-8") as f:
+    version = json.load(f)
 
 
 class TelegramBot:
@@ -35,13 +41,16 @@ class TelegramBot:
         """
         This method looks for updates.
         """
-        res = {}
+        updates_dict = {}
         while True:
             sleep(1)
             updates_dict = (requests.get(
                 TelegramBot.updates_url, timeout=10
             ).json())
-            res = updates_dict["result"][-1]
+            try:
+                res = updates_dict["result"][-1]
+            except IndexError:
+                continue
             if res and res not in TelegramBot.raw_dicts:
                 chat_id = res["message"]["chat"]["id"]
                 fristname = (
@@ -73,9 +82,16 @@ class TelegramBot:
             msgs = BOT_INTERACTIONS_DICT[TelegramBot.last_update["text"]]
             if TelegramBot.last_update["text"] == "/start":
                 msgs = BOT_INTERACTIONS_DICT["/start"].format(
+                    version=version["version"],
                     name=TelegramBot.last_update["fristname"]
                 )
-            if isinstance(msgs, str):
+            if TelegramBot.last_update["text"] == "/about":
+                msgs = BOT_INTERACTIONS_DICT["/about"].format(
+                    version=version["version"]
+                )
+            if isinstance(msgs, str) or msgs[0] == "one_msg":
+                if msgs[0] == "one_msg":
+                    msgs = str().join(msgs[1:])
                 TelegramBot.__send_message(
                     chat_id=TelegramBot.last_update["chat_id"],
                     message=msgs
@@ -91,7 +107,6 @@ class TelegramBot:
                 chat_id=TelegramBot.last_update["chat_id"],
                 message=(
                     "Comando non riconosciuto"
-                    ", se lo implemento ti avviso!"
                 )
             )
 

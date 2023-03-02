@@ -1,0 +1,6 @@
+README.md
+setup.py
+macchinetta_degli_oggetti.egg-info/PKG-INFO
+macchinetta_degli_oggetti.egg-info/SOURCES.txt
+macchinetta_degli_oggetti.egg-info/dependency_links.txt
+macchinetta_degli_oggetti.egg-info/top_level.txt
